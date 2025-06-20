@@ -59,7 +59,10 @@ export default function ProductDetails({ route }) {
   };
 
   const renderImage = ({ item: image, index }) => (
-    <TouchableOpacity onPress={() => onPressImage(image)}>
+    <TouchableOpacity
+      onPress={() => onPressImage(image)}
+      testID={`thumbnail-${index}`}
+    >
       <FastImage
         style={[
           localStyles.minImageStyle,
@@ -87,7 +90,9 @@ export default function ProductDetails({ route }) {
           <View style={styles.flex}>
             <View style={localStyles.reviewHeader}>
               <View style={{ gap: moderateScale(3) }}>
-                <CText type={'r14'}>{review.reviewerName}</CText>
+                <CText type={'r14'} testID={`reviewer-${review.reviewerName}`}>
+                  {review.reviewerName}
+                </CText>
                 <CText type={'r12'} color={colors.grayScale5}>
                   {strings.reviewedOn}{' '}
                   {new Date(review.date).toLocaleDateString('en-GB')}
@@ -95,7 +100,7 @@ export default function ProductDetails({ route }) {
               </View>
               <View style={[styles.rowStart, { gap: moderateScale(5) }]}>
                 {[1, 2, 3, 4, 5].map(i => {
-                  const ratingValue = review.rating || 0;
+                  const ratingValue = review.rating;
                   let iconName = 'star-o';
                   if (ratingValue >= i) {
                     iconName = 'star';
@@ -113,7 +118,11 @@ export default function ProductDetails({ route }) {
                 })}
               </View>
             </View>
-            <CText type={'r14'} style={styles.mt10}>
+            <CText
+              type={'r14'}
+              style={styles.mt10}
+              testID={`review-comment-${index}`}
+            >
               {review.comment}
             </CText>
           </View>
@@ -124,7 +133,7 @@ export default function ProductDetails({ route }) {
   );
 
   const renderTag = tag => (
-    <View key={tag} style={localStyles.tag}>
+    <View key={tag} style={localStyles.tag} testID={`tag-${tag}`}>
       <CText type={'r14'}>{tag}</CText>
     </View>
   );
@@ -174,10 +183,16 @@ export default function ProductDetails({ route }) {
               : product?.category?.toUpperCase()}
           </CText>
           <View style={styles.rowSpaceBetween}>
-            <CText type={'r20'} numberOfLines={2} style={styles.flex}>
+            <CText
+              type={'r20'}
+              testID="product-title"
+              numberOfLines={2}
+              style={styles.flex}
+            >
               {product?.title}
             </CText>
             <TouchableOpacity
+              testID="favorite-button"
               onPress={onPressFavorite}
               style={localStyles.likeContainer}
             >
@@ -244,7 +259,11 @@ export default function ProductDetails({ route }) {
             </View>
           </View>
           <View style={styles.mt15}>
-            <CText type={'r18'} style={styles.mb10}>
+            <CText
+              type={'r18'}
+              testID="product-description"
+              style={styles.mb10}
+            >
               {strings.description}
             </CText>
             <CText

@@ -1,13 +1,13 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import React, { useEffect } from 'react';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
 
 // Local Imports
-import { IS_LOGIN, moderateScale } from '../../common/constants';
-import { colors, styles } from '../../themes';
+import {IS_LOGIN, moderateScale} from '../../common/constants';
+import {colors, styles} from '../../themes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StackNav } from '../../navigation/NavigationKeys';
+import {StackNav} from '../../navigation/NavigationKeys';
 
-export default function SplashScreen({ navigation }) {
+export default function SplashScreen({navigation}) {
   const asyncProcess = async () => {
     try {
       const isLoginValue = await AsyncStorage.getItem(IS_LOGIN);
@@ -15,12 +15,12 @@ export default function SplashScreen({ navigation }) {
       if (!!isLoginValue) {
         return navigation.reset({
           index: 0,
-          routes: [{ name: StackNav.TabNavigation }],
+          routes: [{name: StackNav.TabNavigation}],
         });
       } else {
         navigation.reset({
           index: 0,
-          routes: [{ name: StackNav.Login }],
+          routes: [{name: StackNav.Login}],
         });
       }
     } catch (e) {
@@ -36,7 +36,11 @@ export default function SplashScreen({ navigation }) {
 
   return (
     <View style={localStyles.mainContainer}>
-      <ActivityIndicator size={'small'} color={colors.primary} />
+      <ActivityIndicator
+        testID="ActivityIndicator"
+        size={'small'}
+        color={colors.primary}
+      />
     </View>
   );
 }

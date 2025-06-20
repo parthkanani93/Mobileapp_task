@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import CSafeAreaView from '../../components/common/CSafeAreaView';
 import CText from '../../components/common/CText';
 import CInput from '../../components/common/CInput';
 import CButton from '../../components/common/CButton';
-import { colors, styles } from '../../themes';
-import { IS_LOGIN, moderateScale } from '../../common/constants';
+import {colors, styles} from '../../themes';
+import {IS_LOGIN, moderateScale} from '../../common/constants';
 import CKeyBoardAvoidWrapper from '../../components/common/CKeyBoardAvoidWrapper';
-import CountryPicker, { FlagButton } from 'react-native-country-picker-modal';
+import CountryPicker, {FlagButton} from 'react-native-country-picker-modal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { validatePassword, validatePhoneNumber } from '../../utils/validators';
+import {validatePassword, validatePhoneNumber} from '../../utils/validators';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StackNav } from '../../navigation/NavigationKeys';
+import {StackNav} from '../../navigation/NavigationKeys';
 import strings from '../../i18n/strings';
 
-export default function Login({ navigation }) {
+export default function Login({navigation}) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [phoneNo, setPhoneNo] = useState('');
   const [password, setPassword] = useState('');
@@ -45,12 +45,12 @@ export default function Login({ navigation }) {
     setCallingCodeLib(newCountryCode);
     closeCountryPicker();
 
-    const { status, msg } = validatePhoneNumber(phoneNo.trim(), newCountryCode);
+    const {status, msg} = validatePhoneNumber(phoneNo.trim(), newCountryCode);
     setPhoneNoError(!status && msg);
   };
 
   const onChangedPassword = val => {
-    const { msg } = validatePassword(val.trim());
+    const {msg} = validatePassword(val.trim());
     setPassword(val.trim());
     setPasswordError(msg);
   };
@@ -59,12 +59,12 @@ export default function Login({ navigation }) {
     await AsyncStorage.setItem(IS_LOGIN, 'true');
     navigation.reset({
       index: 0,
-      routes: [{ name: StackNav.TabNavigation }],
+      routes: [{name: StackNav.TabNavigation}],
     });
   };
 
   const RightPasswordEyeIcon = () => (
-    <TouchableOpacity onPress={onPressPasswordEyeIcon}>
+    <TouchableOpacity testID="password-eye" onPress={onPressPasswordEyeIcon}>
       <Ionicons
         name={!!isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
         size={moderateScale(20)}
@@ -77,14 +77,14 @@ export default function Login({ navigation }) {
   const closeCountryPicker = () => setVisiblePiker(false);
 
   const onChangePhoneNo = val => {
-    const { status, msg } = validatePhoneNumber(val.trim(), callingCodeLib);
+    const {status, msg} = validatePhoneNumber(val.trim(), callingCodeLib);
     setPhoneNo(val.trim());
     setPhoneNoError(!status ? msg : '');
   };
 
   const countryIcon = () => {
     return (
-      <View style={localStyles.leftIconStyle}>
+      <View testID="country-icon" style={localStyles.leftIconStyle}>
         <FlagButton
           value={callingCodeLib}
           onOpen={openCountryPicker}
@@ -105,8 +105,7 @@ export default function Login({ navigation }) {
         <CText
           type={'R14'}
           color={colors.textColor2}
-          style={localStyles.descStyle}
-        >
+          style={localStyles.descStyle}>
           {strings.loginAccountDesc}
         </CText>
         <CInput

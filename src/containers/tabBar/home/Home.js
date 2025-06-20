@@ -1,30 +1,32 @@
 import {
   ActivityIndicator,
   FlatList,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
   StyleSheet,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //custom imports
 import CLoader from '../../../components/common/CLoader';
-import { moderateScale, screenWidth } from '../../../common/constants';
+import {moderateScale, screenWidth} from '../../../common/constants';
 import CHeader from '../../../components/common/CHeader';
-import { colors, styles } from '../../../themes';
+import {colors, styles} from '../../../themes';
 import strings from '../../../i18n/strings';
 import ProductCard from '../../../components/homeComponent/ProductCard';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   addProductAction,
   removeProductAction,
 } from '../../../redux/action/favoritesAction';
 import CText from '../../../components/common/CText';
-import { useLazyGetProductsQuery } from '../../../redux/api/productsApi';
+import {useLazyGetProductsQuery} from '../../../redux/api/productsApi';
 
 export default function Home() {
-  const [getProductsApi, { isFetching }] = useLazyGetProductsQuery();
+  const [getProductsApi, {isFetching}] = useLazyGetProductsQuery();
 
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -41,7 +43,7 @@ export default function Home() {
   const getProducts = async () => {
     if (!(!hasMore || isFetching)) {
       try {
-        const res = await getProductsApi({ limit, skip }).unwrap();
+        const res = await getProductsApi({limit, skip}).unwrap();
 
         if (res.products.length < limit) {
           setHasMore(false);
@@ -71,7 +73,7 @@ export default function Home() {
     }
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <ProductCard
       item={item}
       onPressFavorite={() => onPressFavorite(item)}
@@ -104,10 +106,11 @@ export default function Home() {
           <CHeader
             isHideBack={true}
             title={strings.products}
-            style={{ paddingHorizontal: 0 }}
+            style={{paddingHorizontal: 0}}
           />
           <FlatList
             data={filtered}
+            testID="product-list"
             keyExtractor={item => item.id.toString()}
             renderItem={renderItem}
             numColumns={2}
@@ -120,7 +123,11 @@ export default function Home() {
             ListEmptyComponent={ListEmptyComponent}
             ListFooterComponent={
               isFetching && products.length > 0 ? (
-                <ActivityIndicator size="small" color={colors.primary} />
+                <ActivityIndicator
+                  size="small"
+                  color={colors.primary}
+                  testID="footer-loader"
+                />
               ) : null
             }
           />

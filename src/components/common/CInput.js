@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 
 // Local Imports
-import { getHeight, moderateScale } from '../../common/constants';
-import { colors, styles } from '../../themes';
+import {getHeight, moderateScale} from '../../common/constants';
+import {colors, styles} from '../../themes';
 import typography from '../../themes/typography';
 import CText from './CText';
 
@@ -58,14 +58,14 @@ export default CInput = props => {
             height: multiline ? getHeight(250) : getHeight(52),
           },
           inputContainerStyle,
-        ]}
-      >
+        ]}>
         {insideLeftIcon ? (
-          <View style={{ paddingLeft: moderateScale(15) }}>
+          <View style={{paddingLeft: moderateScale(15)}}>
             {insideLeftIcon()}
           </View>
         ) : null}
         <TextInput
+          testID="textInput"
           ref={fieldRef}
           secureTextEntry={_isSecure}
           value={_value}
@@ -86,10 +86,10 @@ export default CInput = props => {
           scrollEnabled={multiline}
           style={[
             localStyle.inputBox,
-            { height: multiline ? getHeight(230) : getHeight(52) },
+            {height: multiline ? getHeight(230) : getHeight(52)},
             inputBoxStyle,
-            _editable == false && { color: colors.placeHolderColor },
-            { overflow: 'hidden' },
+            _editable == false && {color: colors.placeHolderColor},
+            {overflow: 'hidden'},
           ]}
           {...props}
         />
@@ -105,8 +105,7 @@ export default CInput = props => {
           style={{
             ...localStyle.errorText,
             ...errorStyle,
-          }}
-        >
+          }}>
           {_errorText}
         </CText>
       ) : null}

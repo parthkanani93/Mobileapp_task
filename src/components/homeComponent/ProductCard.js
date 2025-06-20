@@ -1,35 +1,34 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 //custom imports
-import { moderateScale, screenWidth } from '../../common/constants';
-import { colors, styles } from '../../themes';
+import {moderateScale, screenWidth} from '../../common/constants';
+import {colors, styles} from '../../themes';
 import CText from '../common/CText';
-import { StackNav } from '../../navigation/NavigationKeys';
+import {StackNav} from '../../navigation/NavigationKeys';
 import FastImage from 'react-native-fast-image';
 
 export default function ProductCard(props) {
   const navigation = useNavigation();
-  const { item, onPressFavorite, favoriteProducts } = props;
+  const {item, onPressFavorite, favoriteProducts} = props;
 
   const onPressDetail = () =>
-    navigation.navigate(StackNav.ProductDetails, { item: item });
+    navigation.navigate(StackNav.ProductDetails, {item: item});
 
   return (
     <TouchableOpacity
       style={localStyles.listMainContainer}
-      onPress={onPressDetail}
-    >
+      onPress={onPressDetail}>
       <View style={styles.rowSpaceBetween}>
         <View style={localStyles.discountContainer}>
           <CText type={'m10'} color={colors.red}>
             {Math.round(item.discountPercentage)}% OFF
           </CText>
         </View>
-        <TouchableOpacity onPress={onPressFavorite}>
+        <TouchableOpacity onPress={onPressFavorite} testID="favorite-button">
           <Ionicons
             name={'heart'}
             size={moderateScale(18)}

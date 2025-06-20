@@ -6,7 +6,7 @@ import { moderateScale } from '../../common/constants';
 import { colors, styles } from '../../themes';
 
 const CDivider = ({ style }) => {
-  return <View style={[localStyles.divider, style]} />;
+  return <View testID={'divider'} style={[localStyles.divider, style]} />;
 };
 
 const localStyles = StyleSheet.create({

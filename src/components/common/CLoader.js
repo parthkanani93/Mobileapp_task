@@ -1,9 +1,9 @@
-import { StyleSheet, View, ActivityIndicator, Modal } from 'react-native';
+import {StyleSheet, View, ActivityIndicator, Modal} from 'react-native';
 import React from 'react';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 
 // Local Imports
-import { colors, styles } from '../../themes';
+import {colors, styles} from '../../themes';
 
 const CLoader = () => {
   const isFocused = useIsFocused();
@@ -15,7 +15,11 @@ const CLoader = () => {
   return (
     <Modal transparent>
       <View style={localStyles.vwMainStyle}>
-        <ActivityIndicator size={'large'} color={colors.primary} />
+        <ActivityIndicator
+          testID="loader-indicator"
+          size={'large'}
+          color={colors.primary}
+        />
       </View>
     </Modal>
   );
