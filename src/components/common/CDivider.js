@@ -1,12 +1,12 @@
-import {StyleSheet, View} from 'react-native';
-import React, {memo} from 'react';
+import { StyleSheet, View } from 'react-native';
+import React, { memo } from 'react';
 
 // Custom Imports
-import {moderateScale} from '../../common/constants';
-import {colors, styles} from '../../themes';
+import { moderateScale } from '../../common/constants';
+import { colors, styles } from '../../themes';
 
-const CDivider = ({style}) => {
-  return <View testID="divider" style={[localStyles.divider, style]} />;
+const CDivider = ({ style }) => {
+  return <View style={[localStyles.divider, style]} />;
 };
 
 const localStyles = StyleSheet.create({

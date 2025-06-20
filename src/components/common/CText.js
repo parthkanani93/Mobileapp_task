@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
 // Local Imports
 import Typography from '../../themes/typography';
-import {colors} from '../../themes';
+import { colors } from '../../themes';
 
 //Text Component
-const CText = ({type, style, align, color, children, testID, ...props}) => {
+const CText = ({ type, style, align, color, children, ...props }) => {
   const fontWeights = () => {
     switch (type.charAt(0).toUpperCase()) {
       case 'R':
@@ -65,14 +65,14 @@ const CText = ({type, style, align, color, children, testID, ...props}) => {
 
   return (
     <Text
-      testID={testID}
       style={[
-        type && {...fontWeights(), ...fontSize()},
-        {color: color ? color : colors.textColor1},
-        align && {textAlign: align},
+        type && { ...fontWeights(), ...fontSize() },
+        { color: color ? color : colors.textColor1 },
+        align && { textAlign: align },
         style,
       ]}
-      {...props}>
+      {...props}
+    >
       {children}
     </Text>
   );

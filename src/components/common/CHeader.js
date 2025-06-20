@@ -1,12 +1,12 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Local Imports
 import CText from './CText';
-import {moderateScale} from '../../common/constants';
-import {colors, styles} from '../../themes';
+import { moderateScale } from '../../common/constants';
+import { colors, styles } from '../../themes';
 
 export default function CHeader(props) {
   const {
@@ -25,10 +25,7 @@ export default function CHeader(props) {
     <View style={localStyles.container}>
       <View style={styles.rowCenter}>
         {!isHideBack && (
-          <TouchableOpacity
-            testID="backBtn"
-            style={styles.pr10}
-            onPress={onPressBack || goBack}>
+          <TouchableOpacity style={styles.pr10} onPress={onPressBack || goBack}>
             <Ionicons
               name="arrow-back-outline"
               size={moderateScale(26)}
@@ -53,6 +50,7 @@ export default function CHeader(props) {
 const localStyles = StyleSheet.create({
   container: {
     ...styles.rowSpaceBetween,
+    ...styles.mb10,
   },
   rightContainer: {
     height: moderateScale(24),
